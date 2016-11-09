@@ -11,7 +11,7 @@ var express	= require('express'),
 	  app.use(express.methodOverride());
 	  app.use(express.static(__dirname + '/static'));
 	  app.use(express.cookieParser());
-		app.use(express.session({ secret: 'safetrack', store: new MongoStore({db: 'safetrack', host: '50.56.70.120'}), expires: new Date(Date.now() + 3600000*12)}) );
+		app.use(express.session({ secret: 'safetrack', store: new MongoStore({db: 'safetrack', host: 'xxxxxxxx'}), expires: new Date(Date.now() + 3600000*12)}) );
 	  app.use(app.router);
 		app.set('view engine', 'jade');
 		app.set('views', __dirname + '/views');
