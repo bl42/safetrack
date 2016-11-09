@@ -1,0 +1,33 @@
+<div class="popup form user">
+		<div class="top-left"></div>
+		<div class="top-side"></div>
+		<div class="top-right"></div>
+		<div class="right-side"></div>
+		<div class="bottom-right"></div>
+		<div class="bottom-side"></div>
+		<div class="bottom-left"></div>
+		<div class="left-side"></div>
+		<div class="content">
+			<h1>Create a New User</h1>
+			<form method="POST" action="/users">
+				<input type="text" id='email' name='user[email]' placeholder="email"/>
+				
+				<input type="text" id="first" name='user[name[first]' placeholder="First"/>
+				<input type="text" id="last" name="user[name[last]" placeholder="Last"/>
+				<br class="clearfix"/>
+				<input type="text" id="password" name="user[password]"  placeholder="Password"/><br>
+
+				<label for="access">Access Level</label>
+				<select id="access" name="user[access]">
+					<option></option>
+					<option value=5>User</option>
+					<option value=1>Admin</option>
+				</select>
+			
+				<br class="clearfix"/>
+
+				<button class='clean-gray'>Create User</button>
+				
+			</form>
+		</div>
+	</div>

@@ -1,0 +1,21 @@
+.popup.form.unit
+	.top-left
+	.top-side
+	.top-right
+	.bottom-right
+	.bottom-side
+	.bottom-left
+	.left-side
+	.right-side
+	.content
+		h1 Edit Unit 
+			span - Unit id: !{id}
+		form(method='POST', action='/units')
+			input(type='hidden', name='_method', value='PUT')
+			input(type='hidden', name='unit[id]', value=id)
+			input(type='text', id='name', name='unit[name]', placeholder='name', class='input_full', value=unit.name)
+			
+			br.clearfix
+			
+			button(class='clean-gray', id='cancel') cancel
+			button(class='clean-gray') Save Unit		

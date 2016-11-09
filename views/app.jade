@@ -1,0 +1,182 @@
+!!! 5
+/if lt IE 7 
+	html.no-js.ie6 
+/if IE 7 
+	html.no-js.ie7 
+/if IE 8 
+	html.no-js.ie8 
+/if (gte IE 9)|!(IE) 
+	html.no-js 
+head	
+	meta(charset="utf-8")
+	meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+	
+	title Safetrack
+
+	meta(name="description", content="")
+	meta(name="author", content="")
+	meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+	link(rel="shortcut icon", href="/favicon.ico")
+
+	link(rel="apple-touch-icon", href="/apple-touch-icon.png")
+	link(rel="stylesheet", href="css/style.css?v=2")
+
+	script(src="js/libs/modernizr-2.0.min.js")
+
+body
+	#mainWrap
+	
+	nav#main
+		img(id='logo', src='images/logo-blue.png', width=60, height=60)
+		hr(style='margin: -5px 7px 10px; border-color: #888')
+		ul#mainNav
+	
+	script(src="http://maps.google.com/maps/api/js?sensor=false") 
+	script
+		var units = ('!{units}'.length) ? '!{units}'.split(',') : 0;
+		window.appLocals = {sessionSocketID: '!{socketSession}', access : '!{access}', units: units };
+		Modernizr.load([{
+			load: 'http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.js',
+			complete: function () {
+				if (!window.jQuery) {
+					yepnope('/js/libs/jquery-1.5.min.js');
+				}
+			}
+		},{
+			load: ['/js/libs/raphael-min.js', '/js/libs/underscore-min.js', '/js/libs/backbone-min.js', '/socket.io/socket.io.js', '/js/plugins.js', '/js/script.js']		
+		}]);
+
+	script(type='text/template', id='map-popup-template')
+		.popup
+			.pointer
+			.top-left
+			.top-side
+			.top-right
+			.bottom-right
+			.bottom-side
+			.bottom-left
+			.left-side
+			.right-side
+			.content
+				.media.clearfix
+					img
+					h1 <%=unitid%>
+					h2 <%=model%>
+					b.age Located <%=time%> ago
+				a(href='#', class='fatLink') View Full Report
+				.line
+					a(href='#', class='fatLink half') History...
+					a(href='#', class='fatLink half') Reports...
+
+	script(type='text/template', id='unit-template')
+		<% var iconState = (state == true) ? '<img src="data:image/gif;base64,R0lGODlhAQABAJAAAP///wAAACH5BAUQAAAALAAAAAABAAEAAAICBAEAOw==" class="device-offline icon">' : '<img src="data:image/gif;base64,R0lGODlhAQABAJAAAP///wAAACH5BAUQAAAALAAAAAABAAEAAAICBAEAOw==" class="device-online icon">';%>
+		a(href='#')
+			<%=iconState%>
+			<%=unitid%>
+			span Near McAllen, TX
+			b.age <%=time%>
+
+	script(type='text/template', id='unit-info-template')
+		- var link = '<img src="http://maps.google.com/maps/api/staticmap?markers=icon:http://safetrack.us/images/blueMarker.png|shadow:false|<%=location.latitude%>,<%=location.longitude%>|&zoom=13&size=380x200&sensor=false"/>'
+		- var download = '<a href="/units/<%=id%>/history/3.csv">Download CSV</a>'
+		- var status = '<a href="/units/<%=id%>/status/0">SOS Off</a>'
+		- var customDateForm = '<form id="customDate" action="/units/<%=id%>/history/"';
+		<% var d = new Date(location.time*1), date = d.toLocaleDateString(), time = d.toLocaleTimeString();%>
+		header
+			nav
+				ul
+					li
+						a(href='#history', id='history')	
+						a(href='#edit', id='edit')	
+			h1 <%=name%>
+			h2 Model: <%=model%>
+		div#media
+			!= link
+			h4 Last Checkin
+			dl#info
+				dt ID:
+				dd <%=id%>
+				dt Date:
+				dd <%=date%>
+				dt Time:
+				dd <%=time%>
+				dt Longitude
+				dd <%=location.longitude%>
+				dt Latidute:
+				dd <%=location.latitude%>
+				dt Speed:
+				dd <%=location.speed/100%> km/h
+				dt Direction
+				dd <%=location.direction%>
+
+		div#media
+			//h1 Download
+			h1!=status
+		div#media
+			h4 History
+			h1 May take upto 2 minutes, please be patient.
+			!=customDateForm
+				br
+				input(type='date', name='daterange',method='post', id='daterange')
+				br
+				br
+				input(type='submit', value='Get History', name='action')
+				button#download Download
+				
+										
+	script(type='text/template', id='unit-history-template')
+		div.bar
+			a(href='#', id='close')
+			span <%=unit.name || unit.id%> | <%= meta %> days ago
+		div#map
+		div#timeline
+			
+	script(type='text/template', id='user-list-template')
+		<% var accessName = access <= 1 ? 'Admin' : access == 5 ? 'User' : 'Unknown'; %>
+		a(href='#')
+			img(src="data:image/gif;base64,R0lGODlhAQABAJAAAP///wAAACH5BAUQAAAALAAAAAABAAEAAAICBAEAOw==", class="device-online icon")
+			<%=name.first%> <%=name.last%> 
+			span <%=lastLoggedIn || 'Never'%>
+			b.age <%=accessName%>
+
+	script(type='text/template', id='user-info-template')
+		<% var accessLvl = access <= 1 ? 'Admin' : access == 5 ? 'User' : 'Unknown'; %>
+
+		header
+			nav
+				ul
+					li
+						a(href='#edit', id='edit')	
+					li
+						a(href='#units', id='units')	
+
+			h1 <%=name.first%> <%=name.last%>
+			h2 Access: <%=accessLvl%>
+		div#media
+			h4 Info
+			dl#info
+				div.meta <%=email%>
+				div.meta <%=accessLvl%>
+				div.meta Last Login: <%=lastLoggedIn%>
+
+	script(type='text/template', id='user-units-template')
+		div.bar
+			a(href='#', id='close')
+			span <%=user.name.first +' '+ user.name.last%>
+		div#units
+			ul#grid
+
+
+	script(type='text/javascript')
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-23502868-1']);
+		_gaq.push(['_trackPageview']);
+		_gaq.push(['_trackPageLoadTime']); 
+		
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+

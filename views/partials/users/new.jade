@@ -1,0 +1,32 @@
+.popup.form.user
+	.top-left
+	.top-side
+	.top-right
+	.bottom-right
+	.bottom-side
+	.bottom-left
+	.left-side
+	.right-side
+	.content
+		h1 Create New User 
+		form(method='POST', action='/users')
+			input(type='text', id='email', name='user[email]', class='input_full', placeholder='email')
+
+
+			input(type='text', id='first', name='name[first]', class='input_178', placeholder='First')
+			input(type='text', id='last', name='name[last]',  class='input_178', placeholder='Last')
+
+			br.clearfix
+
+			input(type='text', id='password', name='user[password]', class='input_full', placeholder='Password')
+
+			label(for='access') Access Level
+			select(id='access',  class='input_full', name='user[access]')
+				option
+				option(value=5) User
+				option(value=1) Admin
+			
+			button(class='clean-gray', id='cancel') cancel
+			button(class='clean-gray') Create User
+		
+			br.clearfix

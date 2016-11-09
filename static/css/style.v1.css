@@ -1,0 +1,49 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td {font-family: Helvetica, Arial, sans-serif; margin:0; padding:0; border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent; }
+body { line-height:1; }
+ol,ul { list-style:none; }
+blockquote,q { quotes:none; }
+blockquote:before,blockquote:after,q:before,q:after { content:''; content:none; }
+
+/* remember to define focus styles! */
+:focus { outline:0; }
+
+/* remember to highlight inserts somehow! */
+ins { text-decoration:none; }
+del { text-decoration:line-through; }
+
+/* tables still need 'cellspacing="0"' in the markup */
+table { border-collapse:collapse; border-spacing:0; }
+
+#header			{width: 100%; height: 50px; background: url(/images/repeatHead.png) top left repeat-x;margin-bottom: -5px; position: relative; z-index: 200;}
+#company-logo	{width: 160px; height: 30px; background: url(/images/small_safetrack.png) top left;background-repeat:no-repeat;}
+div#units		{width: 185px; background-color: #F6F6F6; border-right: 1px solid #E0E0E0; float: left; margin-right: -30px; }
+div#units ul	{}
+div#units ul li	{cursor: pointer ;border-bottom: 1px solid #E0E0E0; display: block; position: relative; width: 145px; padding: 9px 10px 8px 30px; font-size: 13px; line-height: 14.5px; font-weight: bold; color: black; text-overflow: ellipsis; text-rendering: optimizelegibility; white-space: nowrap;}
+div#units ul li	span {color: #707070;display: block;font-size: 11px; font-weight: normal;}
+#units img.icon	{background: transparent url(/images/icons.png) top left no-repeat; width: 11px; height: 11px; top: 18px; left: 11px; position: absolute;}
+#units ul li.selected {background: #DFDFDF;}
+img.icon.device-online	{ background-position: 0px -72px !important; }
+img.icon.device-offline	{ background-position: -16px -72px !important; }
+img.icon.device-unknown	{ background-position: -32px -72px !important; }
+
+
+
+div#units #labelContainer {display: block; position: relative;height: 40px; overflow: visible; color: #818181;}
+div#units label	{-webkit-user-select: none; display: block; font-size: 13px; text-indent: 10px; margin-top: 4px; height: 40px; width: 185px; line-height: 40px; text-rendering: optimizelegibility; color: #818181; border-bottom: 1px solid #E0E0E0;}
+
+#map {background: grey; float: right; width: 300px; height: 300px; position: relative; z-index: 60}
+
+
+
+/* login Page */
+body#login		{background-color:#2E4066;}
+#loginBox {width: 650px; margin: 200px auto;}
+
+#loginBox button {float: left; background: transparent url(/images/loginSprite.png) -451px 0px no-repeat; width: 150px; height: 57px; text-indent: -9999px; border: 0;}
+
+#emailContainer, #passContainer {position: relative; height: 60px; float: left; width: 230px;}
+#emailContainer #email, #passContainer #password {color: #11354d; position: absolute; background: transparent; z-index: 100; border:0; line-height: 50px; font-size: 19px; height: 52px; width: 200px; padding: 0 12px;}
+#loginBox #Label 	{color: #788a96; position: absolute; z-index: 90; line-height: 50px; font-size: 19px; left: 15px;}
+#loginBox #loginBack{position: absolute; z-index: 80; background: transparent url(/images/loginSprite.png) 0 0 no-repeat; width: 225px; height: 52px;}
+
+#popup				{background: #222 url(/images/22.gif) no-repeat 50% 55%; display: block; width: 200px; height: 150px; position: absolute; top: 35%; left: 50%; margin-left: -7px; opacity: .7; -moz-border-radius: 15px; -webkit-border-radius: 15px; border-radius: 15px; font-weight: bold; text-align: center; color: white; font-size: 15px; line-height: 65px;}

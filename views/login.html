@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="/css/style.v1.css" type="text/css" media="screen"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$input = $('input');
+				$input.each(function(){
+					if($(this).val() != '') $(this).parent().find('#Label').hide();
+
+				});
+				$input.focusout(function(){
+					if($(this).val() != '') $(this).parent().find('#Label').hide();
+					else $(this).parent().find('#Label').fadeIn(300);
+				});
+				$input.focus(function(){ console.log('test');
+					 $(this).parent().find('#Label').fadeOut(300);
+				});
+			});
+			
+		</script>
+	</head>
+	<body id="login">
+		<div id="loginBox"><div id="company-logo"></div>
+		<br><form action="/login/" method="post">
+			<div id="emailContainer">
+				<input type="text" name="email" id="email" placeholder="joe@example.com"/>
+<!-- 				<div id="Label">joe@example.com</div>		 -->
+				<div id="loginBack"></div>	
+			</div>
+			
+			<div id="passContainer">
+				<input type="password" name="password" id="password" placeholder="Password"/>
+<!-- 				<div id="Label">password</div>		 -->
+				<div id="loginBack"></div>	
+			</div>
+			<button type="submit" id="submit" name="submit">Sign In</button>
+ 		</form>
+ 		</div>
+ 		
+	<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-23502868-1']);
+	_gaq.push(['_trackPageview']);
+	_gaq.push(['_trackPageLoadTime']); 
+	
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	</script>
+	</body>
+</html>

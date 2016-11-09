@@ -1,0 +1,129 @@
+<!doctype html>  
+
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title></title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/style.css?v=2">
+  <script src="js/libs/modernizr-2.0.min.js"></script>
+
+</head>
+
+<body>
+
+	<div id="mainWrap">
+		
+	</div>
+
+
+	<nav id="main">
+		<img id="logo" src="images/logo-blue.png" width=60 height=60/>	
+		<hr style='margin: -5px 7px 10px; border-color: #888'>
+		<ul id='mainNav'></ul>
+		<a id="settings" href="#"><span class="hidden">settings</span></a>
+	</nav>
+
+  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>  
+
+  <script>
+	Modernizr.load([{
+	  load: 'http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.js',
+	  complete: function () {
+	    if (!window.jQuery) {
+	      yepnope('/js/libs/jquery-1.5.min.js');
+	    }
+	  }
+	},{
+	  load: ['/js/libs/raphael-min.js', '/js/libs/underscore-min.js', '/js/libs/backbone-min.js', '/socket.io/socket.io.js', '/js/plugins.js', '/js/script.js']		
+	}]);
+  </script>
+ 	<script type="text/template" id="map-popup-template">
+			<div class="popup">
+				<div class="pointer"></div>
+				<div class="top-left"></div>
+				<div class="top-side"></div>
+				<div class="top-right"></div>
+				<div class="right-side"></div>
+				<div class="bottom-right"></div>
+				<div class="bottom-side"></div>
+				<div class="bottom-left"></div>
+				<div class="left-side"></div>
+				<div class="content">
+					<div class="media clearfix">
+						<img />
+							<h1><%=unitid%></h1>
+							<h2><%=model%></h2>
+							<b class="age">Located <%=time%> ago</b>
+					</div>	
+					<a href="#" class="fatLink">View Full Report...</a>
+					<div class="line">
+						<a href="#" class="fatLink half">History...</a>
+						<a href="#" class='fatLink half'>Reports...</a>
+					</div>
+				</div>
+			</div>
+	</script>
+	<script type="text/template" id="unit-template">
+			<a href="#">
+				<img src="data:image/gif;base64,R0lGODlhAQABAJAAAP///wAAACH5BAUQAAAALAAAAAABAAEAAAICBAEAOw==" class="device-offline icon"> 
+				<%= unitid %> 
+				<span>Near McAllen, TX</span>
+				<b class="age"> <%=time%> </b>
+			</a>
+	</script>
+	<script type="text/template" id='unit-info-template'>
+			<% var d = new Date(location.time*1), date = d.toLocaleDateString(), time = d.toLocaleTimeString();%>
+			<header>
+				<nav>
+					<ul>
+						<li><a id="history" href="#history"></a></li>
+						<li><a id="edit" href="#edit"></a></li>
+					</ul>
+				</nav>
+				<h1><%=name%></h1>
+				<h2>Model: <%=model%></h2>
+
+			</header>
+	
+			<div id="media">
+				<img src="http://maps.google.com/maps/api/staticmap?markers=icon:http://safetrack.us/images/blueMarker.png|shadow:false|<%=location.latitude%>,<%=location.longitude%>|&zoom=13&size=380x200&sensor=false"/>
+				<h4>Last Check-in</h4>
+			
+				<dl id="info">
+					<dt>Date:</dt>
+					<dd><%=date%></dd>
+					<dt>Time:</dt>
+					<dd><%=time%></dd>
+					<dt>Longitude:</dt>
+					<dd><%=location.longitude%></dd>
+					<dt>Latidute:</dt>
+					<dd><%=location.latitude%></dd>
+					<dt>Speed:</dt>
+					<dd>0 km/h</dd>
+					<dt>Direction:</dt>
+					<dd>East</dd>
+				</dl>
+
+			</div>
+			<div id="media">
+				<h1></h1>
+			</div>
+	</script>
+	<script type="text/template" id='unit-history-template'>
+		<div class="bar"><a id="close" href="#"></a> <span><%=unit.name || unit.id%></span></div>
+	</script>
+	<script type="text/template" id='user-list-template'>
+		
+	</script>
+</body>
+</html>
